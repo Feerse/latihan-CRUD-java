@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class KoneksiMySQL {
 
     private Connection connect;
-    private final String driverName = "com.mysql.jdbc.Driver"; // Driver untuk koneksi ke MySQL
+    private final String driverName = "com.mysql.cj.jdbc.Driver"; // Driver untuk koneksi ke MySQL
 
     private final String jdbc = "jdbc:mysql://";
     private final String host = "localhost:";
@@ -15,8 +15,8 @@ public class KoneksiMySQL {
     private final String database = "latihan_crud"; // Nama database yang digunakan
     private final String url = jdbc + host + port + database;
 
-    private final String username = "root"; // Username default MySQL
-    private final String password = ""; // Password default MySQL
+    private final String username = "fahmi";
+    private final String password = "276207";
 
     public Connection getKoneksi() throws SQLException {
         if (connect == null) {
