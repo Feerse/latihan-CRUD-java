@@ -15,6 +15,8 @@ public final class Form_Siswa extends javax.swing.JFrame {
 
     /**
      * Creates new form Form_Siswa
+     *
+     * @throws java.sql.SQLException
      */
     public Form_Siswa() throws SQLException {
         // mengecek sudah login atau belum
@@ -55,6 +57,10 @@ public final class Form_Siswa extends javax.swing.JFrame {
         btn_keluar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_siswa = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        txt_cari = new javax.swing.JTextField();
+        btn_cari = new javax.swing.JButton();
+        btn_semuaData = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,6 +140,22 @@ public final class Form_Siswa extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabel_siswa);
 
+        jLabel5.setText("Pencarian");
+
+        btn_cari.setText("Cari");
+        btn_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cariActionPerformed(evt);
+            }
+        });
+
+        btn_semuaData.setText("Semua Data");
+        btn_semuaData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_semuaDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,8 +183,17 @@ public final class Form_Siswa extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addComponent(btn_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_semuaData))
+                            .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -171,7 +202,7 @@ public final class Form_Siswa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +215,7 @@ public final class Form_Siswa extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,12 +223,20 @@ public final class Form_Siswa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(btn_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_semuaData, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 826, 365);
+        setBounds(0, 0, 826, 384);
     }// </editor-fold>//GEN-END:initComponents
 
     // method untuk menampilkan data ke tabel_siswa [JTable]
@@ -224,6 +263,7 @@ public final class Form_Siswa extends javax.swing.JFrame {
         txt_id.setText("");
         txt_nama.setText("");
         txt_alamat.setText("");
+        txt_cari.setText("");
     }
 
     // klik double tombol btn_simpan untuk menyimpan data
@@ -243,9 +283,7 @@ public final class Form_Siswa extends javax.swing.JFrame {
                 crud.setNama(txt_nama.getText());
                 crud.setAlamat(txt_alamat.getText());
                 crud.simpanData(crud.getID(), crud.getNama(), crud.getAlamat());
-                JOptionPane.showMessageDialog(null, "Data berhasil tersimpan", "Informasi",
-                        JOptionPane.INFORMATION_MESSAGE);
-
+//                JOptionPane.showMessageDialog(null, "Data berhasil tersimpan", "Informasi",                        JOptionPane.INFORMATION_MESSAGE);
                 tampil_database();
                 reset_text();
             } catch (HeadlessException e) {
@@ -277,8 +315,7 @@ public final class Form_Siswa extends javax.swing.JFrame {
                 crud.setNama(txt_nama.getText());
                 crud.setAlamat(txt_alamat.getText());
                 crud.ubahData(crud.getID(), crud.getNama(), crud.getAlamat());
-                JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Informasi",
-                        JOptionPane.INFORMATION_MESSAGE);
+//                JOptionPane.showMessageDialog(null, "Data berhasil diubah", "Informasi",JOptionPane.INFORMATION_MESSAGE);
 
                 tampil_database();
             } catch (HeadlessException e) {
@@ -299,8 +336,7 @@ public final class Form_Siswa extends javax.swing.JFrame {
                 try {
                     crud.setID(txt_id.getText());
                     crud.hapusData(crud.getID());
-                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus", "Informasi",
-                            JOptionPane.INFORMATION_MESSAGE);
+//                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus", "Informasi", JOptionPane.INFORMATION_MESSAGE);
 
                     tampil_database();
                     reset_text();
@@ -329,6 +365,32 @@ public final class Form_Siswa extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_tabel_siswaMouseClicked
+
+    private void btn_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cariActionPerformed
+        String kataKunci = txt_cari.getText();
+        if (!kataKunci.trim().equals("")) {
+            try {
+                tabmode.setRowCount(0); // Mengosongkan tabel sebelum menampilkan hasil pencarian baru
+                hasil = crud.cariData(kataKunci);
+                while (hasil.next()) {
+                    crud.setID(hasil.getString("id"));
+                    crud.setNama(hasil.getString("nama"));
+                    crud.setAlamat(hasil.getString("alamat"));
+                    String[] data = {crud.getID(), crud.getNama(), crud.getAlamat()};
+                    tabmode.addRow(data);
+                }
+            } catch (SQLException e) {
+                System.out.println("Gagal melakukan pencarian data: " + e);
+            }
+            reset_text();
+        } else {
+            JOptionPane.showMessageDialog(null, "Masukkan kata kunci pencarian!");
+        }
+    }//GEN-LAST:event_btn_cariActionPerformed
+
+    private void btn_semuaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_semuaDataActionPerformed
+        tampil_database();
+    }//GEN-LAST:event_btn_semuaDataActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -373,19 +435,23 @@ public final class Form_Siswa extends javax.swing.JFrame {
 //        });
 //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_cari;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_keluar;
     private javax.swing.JButton btn_reset;
+    private javax.swing.JButton btn_semuaData;
     private javax.swing.JButton btn_simpan;
     private javax.swing.JButton btn_ubah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabel_siswa;
     private javax.swing.JTextField txt_alamat;
+    private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_nama;
     // End of variables declaration//GEN-END:variables

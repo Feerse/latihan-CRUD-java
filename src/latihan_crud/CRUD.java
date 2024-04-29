@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class CRUD {
 
@@ -48,6 +49,30 @@ public class CRUD {
         return alamat;
     }
 
+//    // Cari
+//    public String getCariId() {
+//        return cariId;
+//    }
+//
+//    public void setCariId(String cariId) {
+//        this.cariId = cariId;
+//    }
+//
+//    public String getCariNama() {
+//        return cariNama;
+//    }
+//
+//    public void setCariNama(String cariNama) {
+//        this.cariNama = cariNama;
+//    }
+//
+//    public String getCariAlamat() {
+//        return cariAlamat;
+//    }
+//
+//    public void setCariAlamat(String cariAlamat) {
+//        this.cariAlamat = cariAlamat;
+//    }
     public ResultSet tampilData() {
         CRUDquery = "SELECT * FROM siswa";
         try {
@@ -55,6 +80,20 @@ public class CRUD {
             CRUDhasil = CRUDstat.executeQuery(CRUDquery);
         } catch (SQLException ex) {
             System.out.println("Gagal menampilkan data: " + ex);
+        }
+        return CRUDhasil;
+    }
+
+    public ResultSet cariData(String kataKunci) {
+        CRUDquery = "SELECT * FROM siswa WHERE id LIKE ? OR nama LIKE ? OR alamat LIKE ?";
+        try {
+            CRUDpsmt = CRUDkoneksi.prepareStatement(CRUDquery);
+            CRUDpsmt.setString(1, "%" + kataKunci + "%");
+            CRUDpsmt.setString(2, "%" + kataKunci + "%");
+            CRUDpsmt.setString(3, "%" + kataKunci + "%");
+            CRUDhasil = CRUDpsmt.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("Gagal melakukan pencarian data: " + ex);
         }
         return CRUDhasil;
     }
@@ -69,7 +108,8 @@ public class CRUD {
             CRUDpsmt.executeUpdate();
             CRUDpsmt.close();
         } catch (SQLException ex) {
-            System.out.println("Gagal menyimpan data: " + ex);
+//            System.out.println("Gagal menyimpan data: " + ex);
+            JOptionPane.showMessageDialog(null, "Gagal menyimpan data: " + ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -83,7 +123,8 @@ public class CRUD {
             CRUDpsmt.executeUpdate();
             CRUDpsmt.close();
         } catch (SQLException ex) {
-            System.out.println("Gagal mengubah data: " + ex);
+//            System.out.println("Gagal mengubah data: " + ex);
+            JOptionPane.showMessageDialog(null, "Gagal mengubah data: " + ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -95,8 +136,23 @@ public class CRUD {
             CRUDpsmt.executeUpdate();
             CRUDpsmt.close();
         } catch (SQLException ex) {
-            System.out.println("Gagal menghapus data: " + ex);
+//            System.out.println("Gagal menghapus data: " + ex);
+            JOptionPane.showMessageDialog(null, "Gagal menghapus data: " + ex, "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
+//    public void cariData(String cariId, String cariNama, String cariAlamat) {
+//        CRUDquery = "SELECT * FROM siswa WHERE id LIKE ? OR nama LIKE ? OR alamat LIKE ?";
+//        try {
+//            CRUDpsmt = CRUDkoneksi.prepareStatement(CRUDquery);
+//            CRUDpsmt.setString(1, cariId);
+//            CRUDpsmt.setString(2, cariNama);
+//            CRUDpsmt.setString(3, cariAlamat);
+//            CRUDpsmt.executeQuery();
+//            CRUDpsmt.close();
+//        } catch (SQLException ex) {
+//            System.out.println("Gagal mencari data: " + ex);
+//            JOptionPane.showMessageDialog(null, "Gagal mencari data: " + ex, "Error", JOptionPane.INFORMATION_MESSAGE);
+//        }
+//    }
 }
